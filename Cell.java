@@ -38,6 +38,11 @@ public class Cell {
     public boolean isExplosed() {
         return isExplosed;
     }
+    public int getRow(){
+        return row;
+    }
 
-
+    public int getColumn() {
+        return column;
+    }
 }
