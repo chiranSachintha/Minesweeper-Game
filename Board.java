@@ -64,7 +64,23 @@ public class Board {
 
     }
     private void setNumInCells(){
-        
+
+        int[][] deltas = {{-1,-1},{-1,0},{-1,1},
+                        {0,-1},{0,1},
+                        {1,-1},{1,0},{1,1}
+        };
+        for(Cell bomb:bombs){
+            int row = bomb.getRow();
+            int col = bomb.getColumn();
+
+            for(int[] delta : deltas ){
+                int r = row + delta[0];
+                int c = col + delta[1];
+                if (inBound(r,c)){
+                    cells[r][c].incrementNumber();
+                }
+            }
+        }
 
     }
 
