@@ -5,6 +5,7 @@ public class Cell {
     private boolean isBomb;
     private int number;
     private boolean isExplosed = false;
+    private boolean isGuess = false;
 
     public Cell(int row, int column){
         this.row = row;
@@ -44,5 +45,17 @@ public class Cell {
 
     public int getColumn() {
         return column;
+    }
+
+    public int getNumber(){
+        return number;
+    }
+
+    public boolean flip(){
+        isGuess = true;
+        return !isBomb;
+    }
+    public  boolean isGuess(){
+        return isGuess;
     }
 }
