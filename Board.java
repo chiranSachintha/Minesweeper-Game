@@ -7,12 +7,18 @@ public class Board {
     private int nBombs;
     private Cell[][] cells;
     private Cell[] bombs;
-    private int bombsRemaining;
+    private int numOfUnexplosedRemaining;
 
     public Board(int r, int c, int b){
         this.nRows = r;
         this.nColumns = c;
         this.nBombs = b;
+
+        initializeBoard();
+        shuffleBoard();
+        setNumInCells();
+
+        numOfUnexplosedRemaining = nRows*nColumns - nBombs;
     }
 
     public void initializeBoard(){
@@ -60,7 +66,7 @@ public class Board {
     }
 
     private boolean inBound(int row, int column){
-        return 0 <= row && row <= nRows && 0 <= column && column <=nColumns;
+        return 0 <= row && row < nRows && 0 <= column && column <nColumns;
 
     }
     private void setNumInCells(){
@@ -84,6 +90,19 @@ public class Board {
 
     }
 
+    public Cell[][] getCells() {
+        return cells;
+    }
 
+    public boolean flipCell(Cell cell){
+        if(!cell.isBomb() && !cell.isGuess()){
+            cell.flip();
+            numOfUnexplosedRemaining--;
+            return true;
+        }
+        return false;
+    }
+    public void expandBlank(){
 
+    }
 }
