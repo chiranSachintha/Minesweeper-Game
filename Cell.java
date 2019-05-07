@@ -58,4 +58,19 @@ public class Cell {
     public  boolean isGuess(){
         return isGuess;
     }
+    public String getUndersideState(){
+        if(isBomb()){
+            return "*";
+        }else{
+            return Integer.toString(getNumber());
+        }
+    }
+
+    public String getSurfaceState(){
+        if(isGuess()){
+            return getUndersideState();
+        }else{
+            return "?";
+        }
+    }
 }
