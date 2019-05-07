@@ -1,3 +1,5 @@
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Random;
 
 public class Board {
@@ -102,7 +104,33 @@ public class Board {
         }
         return false;
     }
-    public void expandBlank(){
+    public void expandBlank(Cell cell){
+        int[][] deltas = {{-1,-1},{-1,0},{-1,1},
+                {0,-1},{0,1},
+                {1,-1},{1,0},{1,1}
+        };
 
+        Queue<Cell> toExplore = new LinkedList<Cell>();
+        toExplore.add(cell);
+        while (!toExplore.isEmpty()){
+            Cell currentCell = toExplore.remove();
+            for(int[] delta : deltas){
+                int r = cell.getRow() + delta[0];
+                int c =  cell.getColumn() + delta[1];
+
+                if(inBound(r,c)){
+                    Cell neighbour = cells[r][c];
+                    if(neighbour.isBlank() && flipCell(neighbour) ){
+                        toExplore.add(neighbour);
+
+                    }
+                }
+            }
+        }
+
+
+    }
+    public int getNumOfUnexplosedRemaining(){
+        return numOfUnexplosedRemaining;
     }
 }
